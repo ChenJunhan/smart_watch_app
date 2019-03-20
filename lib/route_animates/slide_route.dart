@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+class SlideRoute extends PageRoute {
+  SlideRoute({
+    @required this.builder,
+    this.transitionDuration = const Duration(milliseconds: 300),
+    this.opaque = true,
+    this.barrierDismissible = false,
+    this.barrierColor,
+    this.barrierLabel,
+    this.maintainState = true,
+  });
+
+  final WidgetBuilder builder;
+
+  @override
+  final Duration transitionDuration;
+
+  @override
+  final bool opaque;
+
+  @override
+  final bool barrierDismissible;
+
+  @override
+  final Color barrierColor;
+
+  @override
+  final String barrierLabel;
+
+  @override
+  final bool maintainState;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) => builder(context);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+
+      
+      /** 若返回不想应用过渡动画则根据 isActive 状态判断是否应用动画 */
+      // if(isActive) {
+      //   return new SlideTransition(
+      //     position: new Tween<Offset>(
+      //     begin: const Offset(1.0, 0.0),
+      //     end: const Offset(0.0, 0.0),
+      //   ).animate(animation),
+      //     child: builder(context),
+      //   );
+      // }else{
+      //   //是返回，则不应用过渡动画
+      //   return Padding(padding: EdgeInsets.zero);
+      // }
+      
+     return new SlideTransition(
+      position: new Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: const Offset(0.0, 0.0),
+     ).animate(animation),
+      child: builder(context),
+     );
+  }
+}
