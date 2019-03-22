@@ -2,7 +2,7 @@
  * @Author: ChenJunhan 
  * @Date: 2019-03-20 16:23:54 
  * @Last Modified by: ChenJunhan
- * @Last Modified time: 2019-03-20 17:38:48
+ * @Last Modified time: 2019-03-21 15:56:15
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +15,7 @@ class CustomInput extends StatefulWidget {
   Widget icon;
   Function onSaveCallback;              // 保存回调函数
   bool isVerCode;                       // 是否显示发送验证码按钮
+  bool isShowSuffixIcon;                // 是否显示输入框右边图标
 
   CustomInput({
     Key key,
@@ -23,7 +24,8 @@ class CustomInput extends StatefulWidget {
     this.autoFocus = false,
     this.icon,
     this.onSaveCallback,
-    this.isVerCode = false
+    this.isVerCode = false,
+    this.isShowSuffixIcon = true
   })
     : assert(hintText != null || type != null),
       super(key: key);
@@ -40,6 +42,8 @@ class CustomInputState extends State<CustomInput> {
   int _count = 60;
   
   Widget _suffixIcon(String type) {
+    if (!widget.isShowSuffixIcon) return null;
+    
     if (type == 'password') {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 0),
@@ -119,7 +123,7 @@ class CustomInputState extends State<CustomInput> {
         ),
       ),
       onSaved: widget.onSaveCallback,
-      obscureText: widget.type == 'password' ? _obscureText : false  
+      obscureText: widget.type == 'password' && widget.isShowSuffixIcon ? _obscureText : false  
     );
   }
 }

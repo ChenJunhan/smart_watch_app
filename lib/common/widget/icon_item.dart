@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_watch_app/route_animates/slide_route.dart';
 
 class IconItem extends StatefulWidget {
 
@@ -7,14 +8,16 @@ class IconItem extends StatefulWidget {
     Key key,
     @required this.icon,       // 图标地址
     @required this.text,       // 文字描述
-    this.link                  // 跳转页面路由地址
+    this.link,                 // 跳转页面路由地址
+    this.widget,               // 跳转widget
   })
-    : assert(icon != null || text != null || link != null),
+    : assert(icon != null || text != null),
       super(key: key);
 
   final String icon;
   final String text;
   final String link;
+  final Widget widget;
 
   @override
   IconItemState createState() => new IconItemState();
@@ -55,6 +58,12 @@ class IconItemState extends State<IconItem> {
       onPressed: () {
         if (widget.link != null) {
           Navigator.of(context).pushNamed(widget.link);
+        }else if (widget.widget != null) {
+          // 跳转到对应的widget
+          Navigator.push( context,
+            new SlideRoute(builder: (context) {
+                  return widget.widget;
+          }));
         }else {
           showDialog(
             context: context,

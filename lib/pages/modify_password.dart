@@ -1,16 +1,30 @@
+/*
+ * @Author: ChenJunhan 
+ * @Date: 2019-03-21 14:26:05 
+ * @Last Modified by: ChenJunhan
+ * @Last Modified time: 2019-03-21 16:49:33
+ */
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_watch_app/common/widget/my_tab_bar.dart';
-import 'package:smart_watch_app/widgets/render_login.dart';
-import 'package:smart_watch_app/widgets/render_register.dart';
+import 'package:smart_watch_app/widgets/render_forget_password.dart';
+import 'package:smart_watch_app/widgets/render_modify_password.dart';
 
-class Login extends StatefulWidget {
+class ModifyPassword extends StatefulWidget {
+  int activePage;          // 0：修改密码页面; 1：忘记密码页面
+
+  ModifyPassword({
+    Key key,
+    @required this.activePage
+  })
+    : assert(activePage != null),
+      super(key: key);
 
   @override
-  LoginState createState() => LoginState();
+  ModifyPasswordState createState() => new ModifyPasswordState();
 }
 
-class LoginState extends State<Login> {
+class ModifyPasswordState extends State<ModifyPassword> {
   MyTabController _controller;
 
   @override
@@ -18,13 +32,9 @@ class LoginState extends State<Login> {
     super.initState();
 
     // 初始化
-    _controller = new MyTabController(activeIndex: 0);
+    _controller = new MyTabController(activeIndex: widget.activePage);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +63,7 @@ class LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     MyTabBar(
-                      tab: ['登录', '注册'],
+                      tab: ['修改密码', '忘记密码'],
                       controller: _controller,
                     )
                   ],
@@ -65,8 +75,8 @@ class LoginState extends State<Login> {
                 child: MyTabBarView(
                   controller: _controller,
                   children: <Widget>[
-                    RenderLogin(),
-                    RenderRegister()
+                    RenderModifyPassword(),
+                    RenderForgetPassword()
                   ],
                 ),
               )
@@ -78,4 +88,3 @@ class LoginState extends State<Login> {
     );
   }
 }
-

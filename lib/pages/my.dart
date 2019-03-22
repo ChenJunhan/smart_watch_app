@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_watch_app/common/gradient_app_bar.dart';
-import 'package:smart_watch_app/common/icon_item.dart';
+import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
+import 'package:smart_watch_app/common/widget/icon_item.dart';
+import 'package:smart_watch_app/pages/modify_password.dart';
 
 class My extends StatelessWidget {
   @override
@@ -107,13 +108,16 @@ class My extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding:EdgeInsets.symmetric(horizontal: ScreenUtil.getInstance().setWidth(20)), 
-                    child: IconItem(icon: 'assets/images/my-1.png', text: '修改密码', link: '/login'),
+                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil.getInstance().setWidth(20)), 
+                    child: IconItem(icon: 'assets/images/my-1.png', text: '修改密码',
+                    // link: '/login' 
+                    widget: ModifyPassword(activePage: 0,)
+                    ),
                   ),
                   Divider(height: 0),
                   Padding(
                     padding:EdgeInsets.symmetric(horizontal: ScreenUtil.getInstance().setWidth(20)), 
-                    child: IconItem(icon: 'assets/images/my-2.png', text: '意见反馈', link: null),
+                    child: IconItem(icon: 'assets/images/my-2.png', text: '意见反馈', link: '/login'),
                   ),
                   Divider(height: 0),
                   Padding(
@@ -122,7 +126,7 @@ class My extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

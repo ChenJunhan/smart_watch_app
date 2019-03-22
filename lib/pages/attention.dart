@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_watch_app/common/gradient_app_bar.dart';
+import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
 import 'package:smart_watch_app/pages/equipment_infomation.dart';
 import 'package:smart_watch_app/route_animates/slide_route.dart';
+import 'package:smart_watch_app/pages/bind_device.dart';
 
 class Attention extends StatelessWidget {
   @override
@@ -94,7 +95,11 @@ class Attention extends StatelessWidget {
                   size: ScreenUtil.getInstance().setSp(40), 
                 ),
                 onPressed: () {
-                  print('add..');
+                  // 跳转到绑定设备页面
+                  Navigator.push( context,
+                    new SlideRoute(builder: (context) {
+                          return new BindDevice();
+                      }));
                 },
               ),
             ),

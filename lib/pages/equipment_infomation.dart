@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_watch_app/common/gradient_app_bar.dart';
-import 'package:smart_watch_app/common/icon_item.dart';
+import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
+import 'package:smart_watch_app/common/widget/icon_item.dart';
 
 class EquipmentInfomation extends StatefulWidget {
 
@@ -112,13 +112,13 @@ class EquipmentInfomationState extends State<EquipmentInfomation> {
               color: Color(0xFFFFFFFF),
               child: Column(
                 children: <Widget>[
-                  IconItem(icon: 'assets/images/deviceInfo-2.jpg', text: '健康周报', link: 'new Page'),
+                  IconItem(icon: 'assets/images/deviceInfo-2.jpg', text: '健康周报'),
                   Divider(height: 0),
-                  IconItem(icon: 'assets/images/deviceInfo-3.jpg', text: '体检报告', link: 'new Page'),
+                  IconItem(icon: 'assets/images/deviceInfo-3.jpg', text: '体检报告'),
                   Divider(height: 0),
-                  IconItem(icon: 'assets/images/deviceInfo-4.jpg', text: '功能设置', link: 'new Page'),
+                  IconItem(icon: 'assets/images/deviceInfo-4.jpg', text: '功能设置'),
                   Divider(height: 0),
-                  IconItem(icon: 'assets/images/deviceInfo-5.jpg', text: '设备属性', link: 'new Page'),
+                  IconItem(icon: 'assets/images/deviceInfo-5.jpg', text: '设备属性'),
                 ],
               ),
             )

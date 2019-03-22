@@ -6,16 +6,18 @@ import 'package:smart_watch_app/common/config/validate.dart';
 import 'package:smart_watch_app/common/widget/form/custom_input.dart';
 import 'package:smart_watch_app/common/widget/form/submit_button.dart';
 
-class RenderLogin extends StatefulWidget {
+class RenderModifyPassword extends StatefulWidget {
   
   @override
-  RenderLoginState createState() => RenderLoginState();
+  RenderModifyPasswordState createState() => RenderModifyPasswordState();
 }
 
-class RenderLoginState extends State<RenderLogin> {
+class RenderModifyPasswordState extends State<RenderModifyPassword> {
   GlobalKey _formKey= new GlobalKey<FormState>();
   String _phoneNum;                           // 手机号码
-  String _password;                           // 密码
+  String _oldPassword;                        // 原始密码
+  String _newPassword;                        // 新密码
+  String _confirmPassword;                    // 确认输入密码  
 
   // 获取焦点输出框可见部分
   FocusNode _focusNodePhoneNum = new FocusNode();
@@ -25,15 +27,18 @@ class RenderLoginState extends State<RenderLogin> {
   void submit() {
     (_formKey.currentState as FormState).save();
                     
-    if (!Validate.phoneNum.hasMatch(_phoneNum)) {
-      Fluttertoast.showToast(msg: "请输入正确的手机号码");
-      return;
-    }else if (!(_password.length > 7 && _password.length < 21)) {
+    if (!Validate.password.hasMatch(_newPassword)) {
       Fluttertoast.showToast(msg: "密码长度为8到20位");
       return;
+    }else if (_newPassword != _confirmPassword) {
+      Fluttertoast.showToast(msg: "前后两次密码不相同");
+      return;
+    }else if (_newPassword ==_oldPassword) {
+      Fluttertoast.showToast(msg: '新旧密码不能一致');
+      return;
     }
-    print(_phoneNum+_password);
-    Fluttertoast.showToast(msg: "登录成功");
+    
+    Fluttertoast.showToast(msg: "修改成功");
     // Navigator.of(context).pop();        // 返回上一层
   }
 
@@ -46,18 +51,19 @@ class RenderLoginState extends State<RenderLogin> {
         autovalidate: true, 
         child: Column(
           children: <Widget>[    
-            EnsureVisibleWhenFocused(
-              focusNode: _focusNodePhoneNum,
+            // 原始密码输入框
+            new EnsureVisibleWhenFocused(
+              focusNode: _focusNodePassword,
               child: SizedBox(
                 height: ScreenUtil.getInstance().setHeight(90),
                 child: CustomInput(
-                  hintText: '请输入手机号码',
-                  type: 'number',
-                  autoFocus: true,
-                  icon: Icon(Icons.phone_iphone),
-                  onSaveCallback: (value) => _phoneNum = value,
-                ),
-              ),
+                  hintText: '请输入原始密码',
+                  type: 'password',
+                  icon: Icon(Icons.lock_outline),
+                  onSaveCallback: (value) => _oldPassword = value,
+                  isShowSuffixIcon: false,
+                )
+              )
             ),
 
             // 密码输入框
@@ -68,34 +74,38 @@ class RenderLoginState extends State<RenderLogin> {
                 child: SizedBox(
                   height: ScreenUtil.getInstance().setHeight(90),
                   child: CustomInput(
-                    hintText: '请输入密码',
+                    hintText: '请输入新密码',
                     type: 'password',
                     icon: Icon(Icons.lock),
-                    onSaveCallback: (value) => _password = value,
+                    onSaveCallback: (value) => _newPassword = value,
+                  )
+                )
+              )
+            ),
+
+            // 密码输入框
+            new EnsureVisibleWhenFocused(
+              focusNode: _focusNodePassword,
+              child: Padding(
+                padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(30)),
+                child: SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(90),
+                  child: CustomInput(
+                    hintText: '请确认新密码',
+                    type: 'password',
+                    icon: Icon(Icons.lock),
+                    onSaveCallback: (value) => _confirmPassword = value,
                   )
                 )
               )
             ),
             
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                FlatButton(
-                  padding: EdgeInsets.all(0),
-                  child: Text('忘记密码？'),
-                  onPressed: () {
-
-                  },
-                )
-              ],
-            ),
-
-            // 登录按钮
+            // 修改密码
             Container(
               width: ScreenUtil.getInstance().setWidth(520),
-              padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(30)),
+              padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(50)),
               child: SubmitButton(
-                title: '登录',
+                title: '修改密码',
                 callback: submit
               )
             )

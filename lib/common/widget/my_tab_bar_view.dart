@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_watch_app/common/model/my_tab_controller.dart';
-import 'package:smart_watch_app/common/tab_controller.dart';
+import 'package:smart_watch_app/common/eventBus/tab_controller.dart';
 
 export 'package:smart_watch_app/common/model/my_tab_controller.dart';
 
@@ -21,12 +21,13 @@ class MyTabBarView extends StatefulWidget {
 }
 
 class MyTabBarViewState extends State<MyTabBarView> {
-  int activeIndex = 0;
+  int activeIndex;
 
   @override
   void initState() {
     super.initState();
 
+    activeIndex = widget.controller.activeIndex;       // 获取激活页面索引
     // 监听tabbar切换页面
     eventBus.on<MyEvent>().listen((MyEvent data) =>
       _onChanged(data.index)
@@ -34,6 +35,7 @@ class MyTabBarViewState extends State<MyTabBarView> {
   }
   
   Widget _render() {
+    print(activeIndex);
     return widget.children[activeIndex];
   }
 

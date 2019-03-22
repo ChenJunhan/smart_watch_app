@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:amap_base/amap_base.dart';
-import 'package:smart_watch_app/common/gradient_app_bar.dart';
+import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /**
@@ -20,40 +20,41 @@ class SafeState extends State<Safe> {
 
   // 功能按钮
   Widget _iconButton({ String icon, String title, String link, bool phone = false }) {
-    return FlatButton(
-      padding: EdgeInsets.all(0),
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      child: Column(
-        children: <Widget>[
-          Image.asset(
-            icon,
-            width: ScreenUtil.getInstance().setWidth(70),
-            height: ScreenUtil.getInstance().setWidth(70),
-          ),
-          Text(title)
-        ],
-      ),
-      onPressed: () {
-        
-        if (phone) {
-          launch("tel:123456789");          // 调起手机通话
-        }else { 
-          showDialog(
-            context: context,
-            child: new AlertDialog(
-              content: new Text("功能待开发..."),
-              actions: <Widget>[
-                new FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: new Text('确定'))
-              ],
-            )
-          );
-        }
-      },
+    return SizedBox(
+      width:ScreenUtil.getInstance().setWidth(190),
+      child: FlatButton(
+        padding: EdgeInsets.all(0),
+        child: Column(
+          children: <Widget>[
+            Image.asset(
+              icon,
+              width: ScreenUtil.getInstance().setWidth(70),
+              height: ScreenUtil.getInstance().setWidth(70),
+            ),
+            Text(title)
+          ],
+        ),
+        onPressed: () {
+          
+          if (phone) {
+            launch("tel:123456789");          // 调起手机通话
+          }else { 
+            showDialog(
+              context: context,
+              child: new AlertDialog(
+                content: new Text("功能待开发..."),
+                actions: <Widget>[
+                  new FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Text('确定'))
+                ],
+              )
+            );
+          }
+        },
+      )
     );
   }
 

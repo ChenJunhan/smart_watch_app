@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:smart_watch_app/common/gradient_app_bar.dart';
-import 'package:smart_watch_app/common/icon_text.dart';
+import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
+import 'package:smart_watch_app/common/widget/icon_text.dart';
 
 class Health extends StatefulWidget {
   

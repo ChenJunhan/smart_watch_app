@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SlideRoute extends PageRoute {
   SlideRoute({
     @required this.builder,
-    this.transitionDuration = const Duration(milliseconds: 300),
+    this.transitionDuration = const Duration(milliseconds: 200),
     this.opaque = true,
     this.barrierDismissible = false,
     this.barrierColor,

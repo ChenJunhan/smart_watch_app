@@ -23,9 +23,10 @@ dependencies:
     git:
       url: https://github.com/OpenFlutter/amap_base_flutter.git
       ref: 0.2.11
-  url_launcher: ^5.0.2             # 打开url插件
-  event_bus: ^1.0.3                # 数据共享插件
+  url_launcher: ^5.0.2            # 打开url插件
+  event_bus: ^1.0.3               # 数据共享插件
   fluttertoast: ^3.0.1            # 弹出层插件
+  oktoast: ^2.1.6
 
 
   # The following adds the Cupertino Icons font to your application.

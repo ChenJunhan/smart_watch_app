@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_watch_app/common/widget/input_visible.dart';
@@ -6,25 +7,31 @@ import 'package:smart_watch_app/common/config/validate.dart';
 import 'package:smart_watch_app/common/widget/form/custom_input.dart';
 import 'package:smart_watch_app/common/widget/form/submit_button.dart';
 
-class RenderLogin extends StatefulWidget {
+class RenderForgetPassword extends StatefulWidget {
   
   @override
-  RenderLoginState createState() => RenderLoginState();
+  RenderForgetPasswordState createState() => RenderForgetPasswordState();
 }
 
-class RenderLoginState extends State<RenderLogin> {
-  GlobalKey _formKey= new GlobalKey<FormState>();
-  String _phoneNum;                           // 手机号码
-  String _password;                           // 密码
-
+class RenderForgetPasswordState extends State<RenderForgetPassword> {
   // 获取焦点输出框可见部分
   FocusNode _focusNodePhoneNum = new FocusNode();
   FocusNode _focusNodePassword = new FocusNode();
+  FocusNode _focusNodeVerCode = new FocusNode();
 
-  // 登录
+  GlobalKey _formKey= new GlobalKey<FormState>();
+  bool _obscureText = true;                   // 是否隐藏文本
+  IconData _pwIcon = Icons.visibility;        // 密码输入框图标
+  String _phoneNum;                           // 手机号码
+  String _password;                           // 密码
+  String _verCode;                            // 验证码                  
+  String _verCodeText = '发送验证码'; 
+  bool _isSendCode = true;                     // 发送验证码按钮点击是否有效
+
+  // 注册
   void submit() {
     (_formKey.currentState as FormState).save();
-                    
+        
     if (!Validate.phoneNum.hasMatch(_phoneNum)) {
       Fluttertoast.showToast(msg: "请输入正确的手机号码");
       return;
@@ -32,20 +39,25 @@ class RenderLoginState extends State<RenderLogin> {
       Fluttertoast.showToast(msg: "密码长度为8到20位");
       return;
     }
-    print(_phoneNum+_password);
-    Fluttertoast.showToast(msg: "登录成功");
-    // Navigator.of(context).pop();        // 返回上一层
+
+    Fluttertoast.showToast(msg: "注册成功");
+    print("${_phoneNum}, ${_password}, ${_verCode}");
+    Navigator.of(context).pop();         // 返回上一层
   }
 
   @override
   Widget build(BuildContext context) {
+    int _count = 60;
+
     return Container(
       width: ScreenUtil.getInstance().setWidth(608),
       child: Form(
         key: _formKey,           //设置globalKey，用于后面获取FormState
         autovalidate: true, 
         child: Column(
-          children: <Widget>[    
+          children: <Widget>[
+            
+            // 手机号码输入框
             EnsureVisibleWhenFocused(
               focusNode: _focusNodePhoneNum,
               child: SizedBox(
@@ -54,7 +66,13 @@ class RenderLoginState extends State<RenderLogin> {
                   hintText: '请输入手机号码',
                   type: 'number',
                   autoFocus: true,
-                  icon: Icon(Icons.phone_iphone),
+                  icon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text('+86', style: TextStyle(fontSize: ScreenUtil.getInstance().setSp(28)),),
+                      Icon(Icons.keyboard_arrow_down, color: Color(0xffB4B4B4),)
+                    ],
+                  ),
                   onSaveCallback: (value) => _phoneNum = value,
                 ),
               ),
@@ -70,33 +88,36 @@ class RenderLoginState extends State<RenderLogin> {
                   child: CustomInput(
                     hintText: '请输入密码',
                     type: 'password',
-                    icon: Icon(Icons.lock),
                     onSaveCallback: (value) => _password = value,
                   )
                 )
               )
             ),
-            
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                FlatButton(
-                  padding: EdgeInsets.all(0),
-                  child: Text('忘记密码？'),
-                  onPressed: () {
 
-                  },
+            // 验证码输入框
+            new EnsureVisibleWhenFocused(
+              focusNode: _focusNodeVerCode,
+              child: Padding(
+                padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(30)),
+                child: SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(90),
+                  child: CustomInput(
+                    hintText: '请输入验证码',
+                    type: 'number',
+                    onSaveCallback: (value) => _verCode = value,
+                    isVerCode: true,
+                  )
                 )
-              ],
+              )
             ),
 
-            // 登录按钮
+            // 重置密码
             Container(
               width: ScreenUtil.getInstance().setWidth(520),
-              padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(30)),
+              padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(55)),
               child: SubmitButton(
-                title: '登录',
-                callback: submit
+                title: '重置密码',
+                callback: submit,
               )
             )
           ]

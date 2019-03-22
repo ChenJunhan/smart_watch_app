@@ -29,9 +29,7 @@ class TabFlatButtonState extends State<TabFlatButton> {
   }
 
   _changeFontSize() {
-
     widget.callBack();
-    
     setState(() {
       widget.isActive = !widget.isActive;
     });
@@ -42,25 +40,28 @@ class TabFlatButtonState extends State<TabFlatButton> {
     return MaterialButton(
       minWidth: ScreenUtil.getInstance().setWidth(110),
       padding: EdgeInsets.all(0),
-      child: Container(
-        height: ScreenUtil.getInstance().setHeight(100),
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(
-            color: widget.isActive ? Color(0xFF04C4C9) : Colors.transparent,
-            width: 2.0
-          ))
-        ),
-        child: Align(
-          alignment: FractionalOffset(0.5, 0.5),             // 字体垂直对齐
-          child: AnimatedDefaultTextStyle(
-            style: TextStyle(fontSize: ScreenUtil.getInstance().setSp(widget.isActive ? 48 : 24), color: Colors.black),
-            duration: Duration(
-              milliseconds: 200
-            ),
-            child: Text(widget.title),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenUtil.getInstance().setWidth(30)),
+        child: Container(
+          height: ScreenUtil.getInstance().setHeight(100),
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(
+              color: widget.isActive ? Color(0xFF04C4C9) : Colors.transparent,
+              width: 2.0
+            ))
           ),
-        )
-      ),
+          child: Align(
+            alignment: FractionalOffset(0.5, 0.5),             // 字体垂直对齐
+            child: AnimatedDefaultTextStyle(
+              style: TextStyle(fontSize: ScreenUtil.getInstance().setSp(widget.isActive ? 48 : 24), color: Colors.black),
+              duration: Duration(
+                milliseconds: 200
+              ),
+              child: Text(widget.title),
+            ),
+          )
+        ),
+      ),  
       onPressed: _changeFontSize,
     );
   }
