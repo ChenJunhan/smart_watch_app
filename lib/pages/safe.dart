@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:amap_base/amap_base.dart';
+// import 'package:amap_base/amap_base.dart';
 import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,7 +16,7 @@ class Safe extends StatefulWidget {
 }
 
 class SafeState extends State<Safe> {
-  AMapController _controller;
+  // AMapController _controller;
 
   // 功能按钮
   Widget _iconButton({ String icon, String title, String link, bool phone = false }) {
@@ -66,26 +66,26 @@ class SafeState extends State<Safe> {
         children: <Widget>[
           GradientAppBar(title: '安全'),
 
-          Expanded(
-            child: AMapView(
-              onAMapViewCreated: (controller) {
-                setState(() {
-                  _controller = controller;
-                });
-              },
-              amapOptions: AMapOptions(
-                compassEnabled: false,
-                zoomControlsEnabled: true,
-                camera: CameraPosition(
-                  target: LatLng(22.545999, 113.941133),
-                  zoom: 15,
-                ),
-              ),
-            ),
-            // child: Container(
-            //   child: Text('这是地图文字'),
-            // ),
-          ),
+          // Expanded(
+          //   child: AMapView(
+          //     onAMapViewCreated: (controller) {
+          //       setState(() {
+          //         _controller = controller;
+          //       });
+          //     },
+          //     amapOptions: AMapOptions(
+          //       compassEnabled: false,
+          //       zoomControlsEnabled: true,
+          //       camera: CameraPosition(
+          //         target: LatLng(22.545999, 113.941133),
+          //         zoom: 15,
+          //       ),
+          //     ),
+          //   ),
+          //   // child: Container(
+          //   //   child: Text('这是地图文字'),
+          //   // ),
+          // ),
           
           Padding(
             padding: EdgeInsets.symmetric(

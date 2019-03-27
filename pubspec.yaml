@@ -17,17 +17,18 @@ dependencies:
     sdk: flutter
   # 添加依赖
   flutter_screenutil: ^0.5.0      # 适配不同屏幕大小
-  flutter_swiper: ^1.1.5          # 轮播插件
+  flutter_swiper: ^1.1.6          # 轮播插件
   charts_flutter: ^0.6.0          # 图表插件
-  amap_base:                      # 高德地图插件
-    git:
-      url: https://github.com/OpenFlutter/amap_base_flutter.git
-      ref: 0.2.11
+  # amap_base:                      # 高德地图插件 有bug
+  #   git:
+  #     url: https://github.com/OpenFlutter/amap_base_flutter.git
+  #     ref: 0.2.11
   url_launcher: ^5.0.2            # 打开url插件
   event_bus: ^1.0.3               # 数据共享插件
   fluttertoast: ^3.0.1            # 弹出层插件
   oktoast: ^2.1.6
-
+  flutter_barcode_scanner: ^0.0.6
+  webview_flutter: 0.3.5+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

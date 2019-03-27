@@ -1,4 +1,4 @@
-package com.example.smartwatchapp;
+package com.example.smart_watch_app;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

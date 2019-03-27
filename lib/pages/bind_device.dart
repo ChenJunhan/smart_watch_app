@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_watch_app/common/widget/form/custom_input.dart';
+// import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class BindDevice extends StatefulWidget {
   @override
@@ -9,6 +11,50 @@ class BindDevice extends StatefulWidget {
 }
 
 class BindDeviceState extends State<BindDevice> {
+  String result = "Hey there!";
+
+  // Future _scanQR() async {  
+  //   try {
+  //     String qrResult = await BarcodeScanner.scan();
+  //     setState(() {
+  //       result = qrResult;
+  //     });
+  //   }on PlatformException catch (ex) {
+  //     if(ex.code ==BarcodeScanner.CameraAccessDenied) {
+  //       setState(() {
+  //         result = "Camera permission was denied"; 
+  //       });
+  //     }else {
+  //       setState(() {
+  //         result = "Unknown Error $ex"; 
+  //       });
+  //     }
+  //   } on FormatException {
+  //     setState(() {
+  //      result = "You pressed the back button before scanning anything"; 
+  //     });
+  //   }
+  // }
+
+  Future<void> initPlatformState() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666");
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      result = barcodeScanRes;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +63,7 @@ class BindDeviceState extends State<BindDevice> {
         child: Column(
           children: <Widget>[
             GradientAppBar(
-              title: '绑定设备',
+              title: result,
               showBefore: true,
             ),
 
@@ -91,9 +137,7 @@ class BindDeviceState extends State<BindDevice> {
                                   'assets/images/scan.png',
                                   fit: BoxFit.cover,
                                 ),
-                                onPressed: () {
-                                  print(123);
-                                },
+                                onPressed: initPlatformState,
                               )
                             )
                           ),

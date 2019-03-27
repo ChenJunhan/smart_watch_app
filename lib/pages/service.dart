@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:smart_watch_app/pages/article_list.dart';
+import 'package:smart_watch_app/route_animates/slide_route.dart';
 
 class Service extends StatefulWidget {
   @override
@@ -16,7 +18,6 @@ class ServiceState extends State<Service> {
 
     _controller = new SwiperController();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,19 +53,11 @@ class ServiceState extends State<Service> {
           ]
         ),
         onPressed: () {
-          showDialog(
-            context: context,
-            child: new AlertDialog(
-              content: new Text("我是AlertDialog"),
-              actions: <Widget>[
-                new FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: new Text('确定'))
-              ],
-            )
-          );
+          // 跳转到绑定设备页面
+                  Navigator.push( context,
+                    new SlideRoute(builder: (context) {
+                          return new ArticleList();
+                      }));
         },
       );
 
@@ -75,27 +68,27 @@ class ServiceState extends State<Service> {
       body: Column(
         children: <Widget>[
           // 轮播
-          // new ConstrainedBox(
-          //   child: new Swiper(
-          //       itemBuilder: (BuildContext context, int index) {
-          //         return new Image.network(
-          //           bannerList[index],
-          //           fit: BoxFit.fill,
-          //         );
-          //       },
-          //       itemCount: 4,
-          //       autoplay: true,
-          //       controller: _controller,
-          //       pagination: new SwiperPagination(
-          //         margin: new EdgeInsets.all(5.0),
-          //         builder: DotSwiperPaginationBuilder(
-          //           color: Color(0xFF999999),
-          //           activeColor: Color(0xFF1AC8CB),
-          //         )
-          //       ),
-          //     ),
-          //     constraints: new BoxConstraints.loose(new Size(ScreenUtil.getInstance().setWidth(750), ScreenUtil.getInstance().setHeight(400)))
-          // ),
+          new ConstrainedBox(
+            child: new Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return new Image.network(
+                    bannerList[index],
+                    fit: BoxFit.fill,
+                  );
+                },
+                itemCount: 4,
+                autoplay: true,
+                controller: _controller,
+                pagination: new SwiperPagination(
+                  margin: new EdgeInsets.all(5.0),
+                  builder: DotSwiperPaginationBuilder(
+                    color: Color(0xFF999999),
+                    activeColor: Color(0xFF1AC8CB),
+                  )
+                ),
+              ),
+              constraints: new BoxConstraints.loose(new Size(ScreenUtil.getInstance().setWidth(750), ScreenUtil.getInstance().setHeight(400)))
+          ),
           
           Container(
             color: Color(0xFFFFFFFF),
