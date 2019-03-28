@@ -32,6 +32,7 @@ class LoginState extends State<Login> {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: statusBarHeight),
         child: Container(

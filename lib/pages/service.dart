@@ -16,17 +16,19 @@ class ServiceState extends State<Service> {
   void initState() {
     super.initState();
 
-    _controller = new SwiperController();
+    setState(() {
+      _controller = new SwiperController();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
 
     var bannerList = [
-      'http://app.anyhao.cn/static/banner/banner1.jpg',
-      'http://app.anyhao.cn/static/banner/banner2.jpg',
-      'http://app.anyhao.cn/static/banner/banner3.jpg',
-      'http://app.anyhao.cn/static/banner/banner4.jpg'
+      'assets/images/banner1.jpg',
+      'assets/images/banner2.jpg',
+      'assets/images/banner3.jpg',
+      'assets/images/banner4.jpg'
     ];
 
     Widget _wrapItem(src, title, index) {
@@ -39,9 +41,9 @@ class ServiceState extends State<Service> {
             Container( 
               width: ScreenUtil.getInstance().setWidth(350),
               height: ScreenUtil.getInstance().setHeight(220),
-              child: new ClipRRect(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: new Image.network(src, fit: BoxFit.cover),
+                child: Image.asset(src, fit: BoxFit.cover),
               ),
             ),
 
@@ -54,10 +56,10 @@ class ServiceState extends State<Service> {
         ),
         onPressed: () {
           // 跳转到绑定设备页面
-                  Navigator.push( context,
-                    new SlideRoute(builder: (context) {
-                          return new ArticleList();
-                      }));
+          Navigator.push( context,
+            SlideRoute(builder: (context) {
+                  return ArticleList();
+              }));
         },
       );
 
@@ -68,10 +70,12 @@ class ServiceState extends State<Service> {
       body: Column(
         children: <Widget>[
           // 轮播
-          new ConstrainedBox(
-            child: new Swiper(
+          Container(
+            width: ScreenUtil.getInstance().setWidth(750),
+            height: ScreenUtil.getInstance().setHeight(400),
+            child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  return new Image.network(
+                  return new Image.asset(
                     bannerList[index],
                     fit: BoxFit.fill,
                   );
@@ -87,7 +91,6 @@ class ServiceState extends State<Service> {
                   )
                 ),
               ),
-              constraints: new BoxConstraints.loose(new Size(ScreenUtil.getInstance().setWidth(750), ScreenUtil.getInstance().setHeight(400)))
           ),
           
           Container(
@@ -99,10 +102,10 @@ class ServiceState extends State<Service> {
               runSpacing: ScreenUtil.getInstance().setWidth(15), // 纵轴（垂直）方向间距
               alignment: WrapAlignment.center, //沿主轴方向居中
               children: <Widget>[
-                _wrapItem('http://api.dengtmac.top:8989/static/service/type4.png', '养生保健', 1),
-                _wrapItem('http://api.dengtmac.top:8989/static/service/type3.png', '疾病预防', 2),
-                _wrapItem('http://api.dengtmac.top:8989/static/service/type1.png', '操作指南', 3),
-                _wrapItem('http://api.dengtmac.top:8989/static/service/type2.png', '大家健康', 4),
+                _wrapItem('assets/images/type4.png', '养生保健', 1),
+                _wrapItem('assets/images/type3.png', '疾病预防', 2),
+                _wrapItem('assets/images/type1.png', '操作指南', 3),
+                _wrapItem('assets/images/type2.png', '大家健康', 4),
               ],
             )
           )

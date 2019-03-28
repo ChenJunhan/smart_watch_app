@@ -68,7 +68,7 @@ class ArticleListState extends State<ArticleList> {
 
   @override
   Widget build(BuildContext context) { 
-    //获取系统状态栏高度
+    //获取系统状态栏高度跟屏幕高度
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     final double screenHeight = MediaQuery.of(context).size.height;
 

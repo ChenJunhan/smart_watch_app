@@ -50,8 +50,8 @@ class My extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(right: ScreenUtil.getInstance().setWidth(40)),
                                 child: ClipOval(
-                                  child: new Image.network(
-                                      'http://app.anyhao.cn/avtar.png', 
+                                  child: new Image.asset(
+                                      'assets/images/avtar.png', 
                                       fit: BoxFit.cover,
                                       width: ScreenUtil.getInstance().setWidth(145),
                                       height: ScreenUtil.getInstance().setWidth(145),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:smart_watch_app/common/widget/gradient_app_bar.dart';
 import 'package:smart_watch_app/common/widget/icon_text.dart';
+import 'package:smart_watch_app/widgets/charts.dart';
 
 class Health extends StatefulWidget {
   
@@ -11,8 +12,6 @@ class Health extends StatefulWidget {
 }
 
 class HealthState extends State<Health> {
-  final List<charts.Series> seriesList = _createSampleData();
-  final bool animate = true;
 
   // 实时数据按钮
   Widget _dataItem({String icon, String title, String count = "暂无数据", String date = "- -", String link}) {
@@ -107,13 +106,9 @@ class HealthState extends State<Health> {
                         padding: EdgeInsets.symmetric(vertical: ScreenUtil.getInstance().setHeight(40)),
                         width: ScreenUtil.getInstance().setWidth(460),
                         height: ScreenUtil.getInstance().setHeight(320),
-                        child: new charts.PieChart(seriesList,
-                              animate: animate,
-                              defaultRenderer: new charts.ArcRendererConfig(
-                                arcWidth: ScreenUtil.getInstance().setWidth(45).round(),
-                                arcRendererDecorators: [
-                                  new charts.ArcLabelDecorator(
-                                    labelPosition: charts.ArcLabelPosition.outside)]))
+                        child: PieOutsideLabelChart(
+                          _createSampleData(),
+                        )
                       ),
                       
                       // 列表
@@ -258,12 +253,4 @@ class HealthState extends State<Health> {
       )
     ];
   }
-}
-
-/// Sample linear data type.
-class LinearSales {
-  final String year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }

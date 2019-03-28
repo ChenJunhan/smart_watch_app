@@ -11,7 +11,7 @@ class BindDevice extends StatefulWidget {
 }
 
 class BindDeviceState extends State<BindDevice> {
-  String result = "Hey there!";
+  String result = "设备昵称";
 
   // Future _scanQR() async {  
   //   try {
@@ -89,21 +89,23 @@ class BindDeviceState extends State<BindDevice> {
                           child: Text('设备昵称'),
                         ),
                         
-                        Container(
-                          width: ScreenUtil.getInstance().setWidth(448),
-                          height: ScreenUtil.getInstance().setHeight(65),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: ScreenUtil.getInstance().setWidth(20)
-                          ),
-                          alignment: Alignment.center,
-                          decoration: new BoxDecoration(
-                            border: new Border.all(color: Colors.black, width: 1.0),
-                            borderRadius: new BorderRadius.circular(5.0)
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration.collapsed(),
-                          ),
+                        Expanded(
+                          child: Container(
+                            height: ScreenUtil.getInstance().setHeight(65),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ScreenUtil.getInstance().setWidth(20)
+                            ),
+                            alignment: Alignment.center,
+                            decoration: new BoxDecoration(
+                              border: new Border.all(color: Colors.black, width: 1.0),
+                              borderRadius: new BorderRadius.circular(5.0)
+                            ),
+                            child: TextField(
+                              decoration: InputDecoration.collapsed(),
+                            ),
+                          )
                         )
+                        
                       ],
                     ),
 

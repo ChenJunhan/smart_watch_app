@@ -38,16 +38,17 @@ class ModifyPasswordState extends State<ModifyPassword> {
 
   @override
   Widget build(BuildContext context) {
-    //获取系统状态栏高度
+    //获取系统状态栏高度、屏幕高度
     final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final double screenHeight = MediaQuery.of(context).size.height;
     
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: statusBarHeight),
         child: Container(
           padding: EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(60)),
           width: ScreenUtil.getInstance().setWidth(750),
-          color: Colors.white,
           child: Column(
             children: <Widget>[
               Image.asset(

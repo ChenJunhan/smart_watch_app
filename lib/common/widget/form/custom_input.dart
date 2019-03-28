@@ -72,7 +72,13 @@ class CustomInputState extends State<CustomInput> {
             topRight: Radius.circular(50),
             bottomRight: Radius.circular(50)
           )),
-          child: Text(_verCodeText),
+          child: Text(
+            _verCodeText, 
+            style: TextStyle(
+              fontSize: ScreenUtil.getInstance().setSp(26),
+            ),
+            maxLines: 1,
+          ),
           onPressed: _isSendCode ? () {
             _isSendCode = false;
             setState(() => _verCodeText = '${_count}秒');
