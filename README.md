@@ -23,9 +23,9 @@
 ```
 
 ## 技术要点
-1.[启动页](/lib/splash.dart)
-2.[自定义渐变标题栏](/lib/common/widget/gradient_app_bar.dart)
-3.[自定义路由动画](/lib/route_animates/slide_route.dart)
+1. [启动页](/lib/splash.dart)
+2. [自定义渐变标题栏](/lib/common/widget/gradient_app_bar.dart)
+3. [自定义路由动画](/lib/route_animates/slide_route.dart)
 ```dart
 // 跳转到设备信息页面
 Navigator.push( context,
@@ -33,7 +33,7 @@ Navigator.push( context,
         return EquipmentInfomation();
 }));
 ```
-4.[自定义底部导航栏](/lib/navigation.dart)
+4. [自定义底部导航栏](/lib/navigation.dart)
 
 ## 安卓下载包
 ![](/assets/images/apk_download.png)
